@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3 - Responsive Web Layout</title>
+
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="./sidebar.css">
+
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="logo">Web<span>Craft</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#blog">Blog</a>
+    </nav>
+</header>
+
+
+<!-- Main Layout -->
+<div class="main-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-icon">WC</div>
+            <h3>WebCraft</h3>
+            <p>Creative Digital Studio</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#home">🏠 Home</a>
+            <a href="#products">🛍️ Products</a>
+            <a href="#blog">📝 Blog</a>
+            <a href="#">⭐ Favorites</a>
+            <a href="#">⚙️ Settings</a>
+        </div>
+
+        <div class="sidebar-bottom">
+            <p>Build. Create. Inspire.</p>
+        </div>
+    </aside>
+
+
+    <!-- Content -->
+    <main class="content" id="home">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div>
+                <p class="small-heading">WELCOME TO WEBCRAFT</p>
+
+                <h1>
+                    Build Beautiful.
+                    <span>Think Creative.</span>
+                </h1>
+
+                <p>
+                    Explore responsive layouts, modern product cards
+                    and beautiful blog designs created using HTML and CSS.
+                </p>
+
+                <a href="#products" class="hero-button">Explore Now →</a>
+            </div>
+
+            <div class="hero-design">
+                <div class="circle circle-one"></div>
+                <div class="circle circle-two"></div>
+                <div class="hero-card">
+                    <span>CSS</span>
+                    <strong>Responsive</strong>
+                    <small>Design</small>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Product Section -->
+        <section class="section" id="products">
+
+            <div class="section-title">
+                <p>FEATURED PRODUCT</p>
+                <h2>Product Card</h2>
+            </div>
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    <span class="sale">NEW</span>
+                    <div class="product-icon">🎧</div>
+                </div>
+
+                <div class="product-details">
+                    <p class="category">PREMIUM AUDIO</p>
+
+                    <h2>Wireless Headphones</h2>
+
+                    <p class="description">
+                        Experience crystal-clear sound with our stylish
+                        wireless headphones designed for comfort and performance.
+                    </p>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>(128 Reviews)</span>
+                    </div>
+
+                    <div class="product-bottom">
+                        <div>
+                            <span class="old-price">₹5,999</span>
+                            <strong>₹4,499</strong>
+                        </div>
+
+                        <button>Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Box Model Explanation -->
+        <section class="box-model-section">
+
+            <div class="section-title">
+                <p>CSS BOX MODEL</p>
+                <h2>Margin • Border • Padding</h2>
+            </div>
+
+            <div class="box-demo">
+                <div class="margin-box">
+                    <span>Margin</span>
+
+                    <div class="border-box">
+                        <span>Border</span>
+
+                        <div class="padding-box">
+                            <span>Padding</span>
+
+                            <div class="content-box">
+                                Content
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Blog Section -->
+        <section class="section" id="blog">
+
+            <div class="section-title">
+                <p>LATEST ARTICLES</p>
+                <h2>From Our Blog</h2>
+            </div>
+
+            <div class="blog-container">
+
+                <!-- Blog 1 -->
+                <article class="blog-card">
+
+                    <div class ="blog-image image-one">
+                        
+                        <span>DESIGN</span>
+                    </div>
+
+                    <div class="blog-content">
+                        <small>18 September 2026</small>
+
+                        <h3>
+                            The Art of Modern Web Design
+                        </h3>
+
+                        <p>
+                            Learn how simple layouts and thoughtful
+                            design can create beautiful websites.
+                        </p>
+
+                        <a href="#">Read Article →</a>
+                    </div>
+
+                </article>
+
+
+                <!-- Blog 2 -->
+                <article class="blog-card">
+
+                    <div class="blog-image image-two">
+                        <span>CSS</span>
+                    </div>
+
+                    <div class="blog-content">
+                        <small>16 September 2026</small>
+
+                        <h3>
+                            Understanding CSS Flexbox
+                        </h3>
+
+                        <p>
+                            Discover how Flexbox makes it easier to
+                            create flexible and responsive layouts.
+                        </p>
+
+                        <a href="#">Read Article →</a>
+                    </div>
+
+                </article>
+
+
+                <!-- Blog 3 -->
+                <article class="blog-card">
+
+                    <div class="blog-image image-three">
+                        <span>RESPONSIVE</span>
+                    </div>
+
+                    <div class="blog-content">
+                        <small>14 September 2026</small>
+
+                        <h3>
+                            Designing for Mobile Devices
+                        </h3>
+
+                        <p>
+                            Make your website look great on desktops,
+                            tablets and smartphones with media queries.
+                        </p>
+
+                        <a href="#">Read Article →</a>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 WebCraft. Designed with HTML & CSS.</p>
+    </p>
+</footer>
+
+</body>
+</html>
