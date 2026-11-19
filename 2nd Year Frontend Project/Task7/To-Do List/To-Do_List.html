@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FocusFlow - To Do List</title>
+    <link rel="stylesheet" href="To-Do_List.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>✦ FocusFlow</h1>
+        <p class="subtitle">Small steps. Big momentum.</p>
+
+        <div class="stats">
+            <div>Total Tasks: <span id="totalCount">0</span></div>
+            <div>Completed: <span id="completedCount">0</span></div>
+            <div>Pending: <span id="pendingCount">0</span></div>
+        </div>
+
+        <h2>Today's Tasks</h2>
+
+        <div class="input-area">
+            <input type="text" id="taskInput"
+                   placeholder="Enter your task...">
+            <button onclick="addTask()">+ Add Task</button>
+        </div>
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <script src="To-Do_List.js"></script>
+</body>
+</html>

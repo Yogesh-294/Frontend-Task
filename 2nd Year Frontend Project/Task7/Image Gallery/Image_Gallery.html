@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frame - Image Gallery</title>
+    <link rel="stylesheet" href="Image_Gallery.css">
+</head>
+<body>
+
+    <header>
+        <h1>FRAME.</h1>
+        <p>A VISUAL JOURNAL</p>
+    </header>
+
+    <div class="container">
+
+        <h2>Moments worth looking at.</h2>
+        <p class="subtitle">Choose an image to explore.</p>
+
+        <div class="main-image">
+            <img id="mainImage"
+            src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"
+            alt="Beautiful mountain landscape">
+        </div>
+
+        <h3 id="imageTitle">Beautiful Mountains</h3>
+
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400"
+            alt="Mountains" onclick="changeImage(this, 'Beautiful Mountains')">
+
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400"
+            alt="Mountain Peaks" onclick="changeImage(this, 'Mountain Peaks')">
+
+            <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400"
+            alt="Ocean" onclick="changeImage(this, 'Blue Ocean')">
+
+            <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=400"
+            alt="Sunset" onclick="changeImage(this, 'Golden Sunset')">
+
+            <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=400"
+            alt="Forest" onclick="changeImage(this, 'Green Forest')">
+
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=400"
+            alt="Nature" onclick="changeImage(this, 'Nature Escape')">
+        </div>
+
+    </div>
+
+    <footer>
+        Made with ♥ | FRAME Visual Gallery
+    </footer>
+
+    <script src="Image_Gallery.js"></script>
+</body>
+</html>

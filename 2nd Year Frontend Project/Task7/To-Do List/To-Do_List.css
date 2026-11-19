@@ -1,0 +1,140 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #14132c, #443078);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+}
+
+.container {
+    background: #211e39;
+    width: 550px;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px #0005;
+}
+
+h1 {
+    text-align: center;
+    font-size: 38px;
+    color: #bba2ff;
+}
+
+.subtitle {
+    text-align: center;
+    color: #aaa;
+    margin: 10px 0 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.stats div {
+    background: #342d52;
+    padding: 15px 8px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    flex: 1;
+}
+
+.stats span {
+    display: block;
+    font-size: 23px;
+    color: #bba2ff;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 18px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border-radius: 9px;
+    border: 1px solid #66568e;
+    background: #151326;
+    color: white;
+    outline: none;
+}
+
+button {
+    padding: 13px 17px;
+    border: none;
+    border-radius: 9px;
+    background: #a78bfa;
+    color: #21152f;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c3adff;
+}
+
+ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+li {
+    background: #342d52;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 9px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    overflow-wrap: anywhere;
+}
+
+li span {
+    flex: 1;
+}
+
+li.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+li button {
+    padding: 8px 12px;
+    background: #ff7185;
+}
+
+@media(max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+    }
+
+    .input-area {
+        flex-direction: column;
+    }
+}
