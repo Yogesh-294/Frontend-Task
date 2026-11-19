@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ChessMaster - Dynamic Chessboard</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 35px 15px;
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #101522,
+        #1d3540,
+        #101522
+    );
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    color: #e9c47b;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #b5c5ca;
+    margin-bottom: 30px;
+}
+
+/* Chessboard Container */
+
+.board-container {
+    width: min(100%, 600px);
+    margin: auto;
+    padding: 15px;
+
+    background: #263746;
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px #0008;
+    border: 1px solid #ffffff20;
+}
+
+/* MAIN CHESSBOARD */
+
+.board {
+    display: grid;
+
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border: 5px solid #d5b77a;
+    border-radius: 8px;
+}
+
+/* ALL 64 SQUARES SAME SIZE */
+
+.square {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(20px, 5vw, 48px);
+
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+}
+
+/* Square Colors */
+
+.white {
+    background-color: #f0e5ce;
+    color: #202b32;
+}
+
+.black {
+    background-color: #65836f;
+    color: white;
+}
+
+/* Hover Effect */
+
+.square:hover {
+    filter: brightness(1.2);
+}
+
+/* Selected Square */
+
+.square.selected {
+    outline: 4px solid #ffca55;
+    outline-offset: -4px;
+
+    position: relative;
+    z-index: 1;
+}
+
+/* Buttons */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 13px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #d7b66d,
+        #a77c39
+    );
+
+    color: #151c23;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #0005;
+}
+
+/* Information Section */
+
+.info {
+    max-width: 600px;
+    margin: 25px auto;
+    padding: 20px;
+
+    background: #ffffff12;
+    border-radius: 15px;
+
+    line-height: 1.8;
+    color: #d5e0e5;
+}
+
+.info h3 {
+    color: #e9c47b;
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 25px;
+    color: #91a3a8;
+    font-size: 13px;
+}
+
+/* Responsive Design */
+
+@media(max-width: 500px) {
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .board-container {
+        padding: 10px;
+    }
+
+    .square {
+        font-size: clamp(17px, 7vw, 35px);
+    }
+
+    button {
+        padding: 11px 14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>♟ ChessMaster</h1>
+
+    <p class="subtitle">
+        Experience the beauty of chess through JavaScript
+    </p>
+
+    <!-- Chessboard -->
+
+    <div class="board-container">
+
+        <div class="board" id="chessboard"></div>
+
+    </div>
+
+    <!-- Controls -->
+
+    <div class="controls">
+
+        <button onclick="createBoard()">
+            ↻ Reset Board
+        </button>
+
+        <button onclick="togglePieces()">
+            ♟ Show / Hide Pieces
+        </button>
+
+        <button onclick="clearSelection()">
+            Clear Selection
+        </button>
+
+    </div>
+
+    <!-- Information -->
+
+    <div class="info">
+
+        <h3>♛ About Chessboard</h3>
+
+        <p>
+            This chessboard is generated dynamically
+            using JavaScript nested loops.
+        </p>
+
+        <p>
+            Total Rows: 8 |
+            Total Columns: 8 |
+            Total Squares: 64
+        </p>
+
+        <p>
+            All 64 squares have exactly equal dimensions.
+        </p>
+
+        <p>
+            Click any square to highlight it!
+        </p>
+
+    </div>
+
+    <footer>
+        CHESSMASTER | DESIGNED WITH HTML, CSS & JAVASCRIPT
+    </footer>
+
+</div>
+
+<script>
+
+// Get Chessboard Element
+
+let board = document.getElementById("chessboard");
+
+let showPieces = true;
+
+// Chess Pieces
+
+let pieces = [
+
+    ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+
+    ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+
+    ["", "", "", "", "", "", "", ""],
+
+    ["", "", "", "", "", "", "", ""],
+
+    ["", "", "", "", "", "", "", ""],
+
+    ["", "", "", "", "", "", "", ""],
+
+    ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+
+    ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]
+
+];
+
+// Function to Create Chessboard
+
+function createBoard() {
+
+    board.innerHTML = "";
+
+    // Outer Loop for Rows
+
+    for (let row = 0; row < 8; row++) {
+
+        // Inner Loop for Columns
+
+        for (let col = 0; col < 8; col++) {
+
+            // Create Square
+
+            let square = document.createElement("div");
+
+            // Alternating Square Colors
+
+            if ((row + col) % 2 === 0) {
+
+                square.classList.add("square", "white");
+
+            } else {
+
+                square.classList.add("square", "black");
+
+            }
+
+            // Add Chess Pieces
+
+            if (showPieces) {
+
+                square.textContent = pieces[row][col];
+
+            }
+
+            // Highlight Selected Square
+
+            square.addEventListener("click", function() {
+
+                document.querySelectorAll(".square")
+                .forEach(s => s.classList.remove("selected"));
+
+                square.classList.add("selected");
+
+            });
+
+            // Add Square to Board
+
+            board.appendChild(square);
+
+        }
+
+    }
+
+}
+
+// Show / Hide Chess Pieces
+
+function togglePieces() {
+
+    showPieces = !showPieces;
+
+    createBoard();
+
+}
+
+// Clear Selected Square
+
+function clearSelection() {
+
+    document.querySelectorAll(".square")
+    .forEach(square => {
+
+        square.classList.remove("selected");
+
+    });
+
+}
+
+// Generate Chessboard Initially
+
+createBoard();
+
+</script>
+
+</body>
+</html>

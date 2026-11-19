@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskFlow - To Do List</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #10152c, #30245b, #101c32);
+    min-height: 100vh;
+    padding: 40px 15px;
+    color: white;
+}
+
+.container {
+    max-width: 750px;
+    margin: auto;
+    background: rgba(255,255,255,0.09);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px #0006;
+    border: 1px solid #ffffff25;
+}
+
+h1 {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 8px;
+    color: #b9a7ff;
+}
+
+.subtitle {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 12px 17px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.add-btn {
+    background: #8b70ff;
+    color: white;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: #ffffff15;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat h2 {
+    color: #c5b5ff;
+}
+
+.stat p {
+    color: #ccc;
+    font-size: 12px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background: #ffffff15;
+    color: white;
+}
+
+.filter-btn.active {
+    background: #8b70ff;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff12;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 13px;
+    animation: appear 0.3s ease;
+}
+
+li span {
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
+li.completed span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+li input {
+    width: 18px;
+    height: 18px;
+    accent-color: #8b70ff;
+}
+
+.action-btn {
+    padding: 7px 10px;
+    color: white;
+    background: #ffffff20;
+}
+
+.delete {
+    background: #ff4966;
+}
+
+.progress-box {
+    margin-top: 25px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #ffffff25;
+    border-radius: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8b70ff, #36e0b3);
+    transition: 0.4s;
+}
+
+#progressText {
+    margin-top: 8px;
+    color: #ccc;
+    font-size: 13px;
+}
+
+@keyframes appear {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@media(max-width: 520px) {
+    .container {padding: 20px;}
+    h1 {font-size: 27px;}
+    .input-area {flex-direction: column;}
+    .stats {gap: 6px;}
+    li {flex-wrap: wrap;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✨ TaskFlow</h1>
+    <p class="subtitle">Organize your day. Achieve your goals.</p>
+
+    <div class="input-area">
+        <input type="text" id="taskInput"
+        placeholder="Enter your new task...">
+
+        <button class="add-btn" onclick="addTask()">
+            + Add Task
+        </button>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <h2 id="total">0</h2>
+            <p>Total Tasks</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="completed">0</h2>
+            <p>Completed</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="remaining">0</h2>
+            <p>Remaining</p>
+        </div>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active"
+        onclick="setFilter('all',this)">All</button>
+
+        <button class="filter-btn"
+        onclick="setFilter('active',this)">In Progress</button>
+
+        <button class="filter-btn"
+        onclick="setFilter('completed',this)">Completed</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <div class="progress-box">
+        <h3>Daily Progress</h3>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <p id="progressText">0% Completed</p>
+    </div>
+
+</div>
+
+<script>
+
+let tasks = [];
+let currentFilter = "all";
+
+function addTask() {
+
+    let input = document.getElementById("taskInput");
+    let task = input.value.trim();
+
+    if (task === "") {
+        alert("Please enter a task!");
+        return;
+    }
+
+    tasks.push({
+        text: task,
+        completed: false
+    });
+
+    input.value = "";
+
+    displayTasks();
+}
+
+function displayTasks() {
+
+    let list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+
+        if (currentFilter === "active" && task.completed)
+            return;
+
+        if (currentFilter === "completed" && !task.completed)
+            return;
+
+        let li = document.createElement("li");
+
+        if (task.completed) {
+            li.classList.add("completed");
+        }
+
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+
+        checkbox.onchange = function() {
+            tasks[index].completed = checkbox.checked;
+            displayTasks();
+        };
+
+        let span = document.createElement("span");
+        span.textContent = task.text;
+
+        let up = document.createElement("button");
+        up.textContent = "↑";
+        up.className = "action-btn";
+        up.disabled = index === 0;
+        up.onclick = () => moveTask(index, -1);
+
+        let down = document.createElement("button");
+        down.textContent = "↓";
+        down.className = "action-btn";
+        down.disabled = index === tasks.length - 1;
+        down.onclick = () => moveTask(index, 1);
+
+        let del = document.createElement("button");
+        del.textContent = "✕";
+        del.className = "action-btn delete";
+        del.onclick = () => deleteTask(index);
+
+        li.append(checkbox, span, up, down, del);
+        list.appendChild(li);
+
+    });
+
+    updateStats();
+}
+
+function moveTask(index, direction) {
+
+    let newIndex = index + direction;
+
+    if (newIndex < 0 || newIndex >= tasks.length)
+        return;
+
+    [tasks[index], tasks[newIndex]] =
+    [tasks[newIndex], tasks[index]];
+
+    displayTasks();
+}
+
+function deleteTask(index) {
+
+    tasks.splice(index, 1);
+    displayTasks();
+
+}
+
+function setFilter(filter, button) {
+
+    currentFilter = filter;
+
+    document.querySelectorAll(".filter-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    displayTasks();
+}
+
+function updateStats() {
+
+    let total = tasks.length;
+
+    let completed = tasks.filter(
+        task => task.completed
+    ).length;
+
+    let remaining = total - completed;
+
+    let percentage = total === 0
+        ? 0
+        : Math.round((completed / total) * 100);
+
+    document.getElementById("total").textContent = total;
+
+    document.getElementById("completed").textContent =
+    completed;
+
+    document.getElementById("remaining").textContent =
+    remaining;
+
+    document.getElementById("progress").style.width =
+    percentage + "%";
+
+    document.getElementById("progressText").textContent =
+    percentage + "% Completed";
+
+}
+
+document.getElementById("taskInput")
+.addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+        addTask();
+    }
+
+});
+
+displayTasks();
+
+</script>
+
+</body>
+</html>
