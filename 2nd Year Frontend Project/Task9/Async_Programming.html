@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async Data Fetching</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+        }
+
+        .container {
+            width: 420px;
+            padding: 35px;
+            text-align: center;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #b8c7dc;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .status {
+            padding: 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #00e6a0;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,114,255,0.4);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 18px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 12px;
+            text-align: left;
+            display: none;
+        }
+
+        .result h3 {
+            color: #00e6a0;
+            margin-bottom: 12px;
+        }
+
+        .result p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #dce8f5;
+        }
+
+        .loader {
+            width: 30px;
+            height: 30px;
+            border: 4px solid #ffffff40;
+            border-top: 4px solid #00c6ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .footer {
+            margin-top: 22px;
+            color: #91a4bd;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="icon">🌐</div>
+
+        <h1>Async Data Fetching</h1>
+
+        <p class="subtitle">
+            Experience JavaScript Promises & setTimeout()
+        </p>
+
+        <div class="status" id="status">
+            ● Server Connected
+        </div>
+
+        <button id="fetchBtn" onclick="fetchData()">
+            Fetch Server Data →
+        </button>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="result" id="result">
+            <h3>✓ Data Received Successfully</h3>
+            <p><b>User:</b> <span id="username"></span></p>
+            <p><b>Email:</b> <span id="email"></span></p>
+            <p><b>Role:</b> <span id="role"></span></p>
+            <p><b>Response Time:</b> 3 Seconds</p>
+        </div>
+
+        <div class="footer">
+            Powered by JavaScript | Async Programming
+        </div>
+
+    </div>
+
+    <script>
+
+        function fetchData() {
+
+            let status = document.getElementById("status");
+            let loader = document.getElementById("loader");
+            let result = document.getElementById("result");
+            let button = document.getElementById("fetchBtn");
+
+            status.innerHTML = "● Connecting to server...";
+            status.style.color = "#ffd166";
+
+            loader.style.display = "block";
+            result.style.display = "none";
+            button.disabled = true;
+
+            let promise = new Promise(function(resolve, reject) {
+
+                setTimeout(function() {
+
+                    let data = {
+                        username: "Yogesh Kumar Singh",
+                        email: "kumarsinghyogesh294@gmail.com",
+                        role: "Student"
+                    };
+
+                    resolve(data);
+
+                }, 3000);
+
+            });
+
+            promise.then(function(data) {
+
+                document.getElementById("username").innerHTML =
+                    data.username;
+
+                document.getElementById("email").innerHTML =
+                    data.email;
+
+                document.getElementById("role").innerHTML =
+                    data.role;
+
+                status.innerHTML = "● Data Loaded Successfully";
+                status.style.color = "#00e6a0";
+
+                result.style.display = "block";
+
+            })
+
+            .catch(function(error) {
+
+                status.innerHTML = "● Something went wrong!";
+                status.style.color = "#ff6b6b";
+
+            })
+
+            .finally(function() {
+
+                loader.style.display = "none";
+                button.disabled = false;
+
+                button.innerHTML = "Fetch Again ↻";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
